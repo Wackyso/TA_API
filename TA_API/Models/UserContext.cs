@@ -19,7 +19,7 @@ namespace TA_API.Models
         public DbSet<User> users { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)//
         {
             optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ThirdAppDB;Username=postgres;Password=");
         }

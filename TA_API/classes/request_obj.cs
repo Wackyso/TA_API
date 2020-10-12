@@ -38,6 +38,6 @@ namespace TA_API
         public string password;
         public int dialog_id;
         public string text;
-        public TimeHandler send_time { get; set; }
+        public DateTime send_time { get; set; }
     }
 }

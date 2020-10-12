@@ -11,11 +11,19 @@ namespace TA_API.Models
 {
     public class ThAppContext : DbContext
     {
+
+        protected override void OnModelCreating(ModelBuilder modelBuilder)
+        {
+            modelBuilder.Entity<Dialog>().HasKey(u => new { u.login, u.dialog_id});
+            modelBuilder.Entity<Message>().HasKey(u => new { u.login, u.send_time});
+        }
+
         public ThAppContext()
         {
             Database.EnsureCreated();
             
         }
+
 
         public DbSet<User> users { get; set; }
         public DbSet<Dialog> dialogs { get; set; }
@@ -24,7 +32,7 @@ namespace TA_API.Models
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ThirdAppDB;Username=postgres;Password=07AVISIH");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ThirdAppDB;Username=postgres;Password=");
         }
     }
 
@@ -53,18 +61,18 @@ namespace TA_API.Models
         public string text { get; set; }
         public int dialog_id  { get; set; }
         [Key]
-        public TimeHandler send_time { get; set; }
+        public DateTime send_time { get; set; }
 
     }
 
     public class Message_for_resp
     {
-        [Key]
+        
         public int login { get; set; }
         public string text { get; set; }
         public int dialog_id { get; set; }
-        [Key]
-        public TimeHandler send_time { get; set; }
+        
+        public DateTime send_time { get; set; }
 
     }
 }

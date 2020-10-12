@@ -18,9 +18,12 @@ namespace TA_API.Controllers
         }
 
         // GET api/values/5
-        public string Get(int id)
+        public string Get(string id)
         {
-            return "value";
+            string[] words = id.Split(new char[] { '=' });
+            string login = words[0];
+            //string password = words[1];
+            return id;
         }
 
         // POST api/values

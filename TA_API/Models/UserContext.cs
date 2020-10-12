@@ -5,6 +5,7 @@ using System.Linq;
 using System.Web;
 
 using Microsoft.EntityFrameworkCore;
+using Npgsql.TypeHandlers.DateTimeHandlers;
 
 namespace TA_API.Models
 {
@@ -17,11 +18,13 @@ namespace TA_API.Models
         }
 
         public DbSet<User> users { get; set; }
+        public DbSet<Dialog> dialogs { get; set; }
+        public DbSet<Message> messages { get; set; }
 
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)//
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
-            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ThirdAppDB;Username=postgres;Password=");
+            optionsBuilder.UseNpgsql("Host=localhost;Port=5432;Database=ThirdAppDB;Username=postgres;Password=07AVISIH");
         }
     }
 
@@ -30,6 +33,38 @@ namespace TA_API.Models
         [Key]
         public string login { get; set; }
         public string password { get; set; }
+
+    }
+
+    public class Dialog
+    {
+        [Key]
+        public string login { get; set; }
+        [Key]
+        public int dialog_id { get; set; }
+        public string interlocutor { get; set; }
+
+    }
+
+    public class Message
+    {
+        [Key]
+        public string login { get; set; }
+        public string text { get; set; }
+        public int dialog_id  { get; set; }
+        [Key]
+        public TimeHandler send_time { get; set; }
+
+    }
+
+    public class Message_for_resp
+    {
+        [Key]
+        public int login { get; set; }
+        public string text { get; set; }
+        public int dialog_id { get; set; }
+        [Key]
+        public TimeHandler send_time { get; set; }
 
     }
 }

@@ -43,8 +43,14 @@ namespace TA_API
                     dialog = new Dialog();
                     dialog.login = obj.login;
                     dialog.interlocutor = obj.interlocutor;
-                    dialog.dialog_id = db.dialogs.Where(d => d.login == obj.login).ToList().Count;
+                    dialog.dialog_id = db.dialogs.ToList().Count;
                     db.dialogs.Add(dialog);
+
+                    dialog = new Dialog();
+                    dialog.login = obj.interlocutor;
+                    dialog.interlocutor = obj.login;
+                    db.dialogs.Add(dialog);
+
                     db.SaveChanges();
                 }
             }

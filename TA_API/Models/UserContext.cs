@@ -61,7 +61,7 @@ namespace TA_API.Models
         public string text { get; set; }
         public int dialog_id  { get; set; }
         [Key]
-        public DateTime send_time { get; set; }
+        public string send_time { get; set; }
 
     }
 
@@ -70,7 +70,7 @@ namespace TA_API.Models
         
         public int login { get; set; }
         public string text { get; set; }
-        public int dialog_id { get; set; }
+        
         
         public DateTime send_time { get; set; }
 

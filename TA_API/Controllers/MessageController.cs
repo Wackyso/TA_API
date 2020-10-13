@@ -27,7 +27,7 @@ namespace TA_API
             string[] words = id.Split(new char[] { '=' });
             string login = words[0];
             string password = words[1];
-            int dialog_id = Convert.ToInt32( words[3]);
+            int dialog_id = Convert.ToInt32( words[2]);
 
             List<Message_for_resp> a = new List<Message_for_resp> { };
             List<Message_for_resp> badlog = new List<Message_for_resp> { };
@@ -36,15 +36,15 @@ namespace TA_API
 
             if (user.password == password)
             {
-                List<Message> b = db.messages.Where(m => m.login == login && m.dialog_id == dialog_id).ToList();
+                List<Message> b = db.messages.Where(m => m.dialog_id == dialog_id).ToList();
 
                 foreach (Message B in b)
                 {
                     Message_for_resp y = new Message_for_resp();
                     y.login = 2;
-                    y.send_time = B.send_time;
+                    if (B.login==login) y.login = 1;
+                    y.send_time = Convert.ToDateTime(B.send_time);
                     y.text = B.text;
-                    if (B.login == login) y.login = 1;
                     a.Add(y);
                 }
                 return a;
@@ -67,7 +67,7 @@ namespace TA_API
                 mes.login = obj.login;
                 mes.dialog_id = obj.dialog_id;
                 mes.text = obj.text;
-                mes.send_time = obj.send_time;
+                mes.send_time = Convert.ToString( obj.send_time);
                 db.messages.Add(mes);
                 db.SaveChanges();
             }

@@ -10,11 +10,13 @@ namespace TA_API.Controllers
 {
     public class ValuesController : ApiController
     {
+        
+
         // GET api/values
         ThAppContext db = new ThAppContext();
-        public IEnumerable<string> Get()
+        public string Get()
         {
-            return new string[] { db.users.Find("exo").login, "value2" };
+            return "ok";
         }
 
         // GET api/values/5

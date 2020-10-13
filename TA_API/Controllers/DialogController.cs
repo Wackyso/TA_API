@@ -40,6 +40,7 @@ namespace TA_API
                 Dialog dialog = db.dialogs.Where(d => d.login == obj.login && d.interlocutor == obj.interlocutor).FirstOrDefault<Dialog>();
                 if (dialog == null)
                 {
+                    dialog = new Dialog();
                     dialog.login = obj.login;
                     dialog.interlocutor = obj.interlocutor;
                     dialog.dialog_id = db.dialogs.Where(d => d.login == obj.login).ToList().Count;
